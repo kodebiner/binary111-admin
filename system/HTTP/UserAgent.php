@@ -91,7 +91,7 @@ class UserAgent
     /**
      * HTTP Referer
      *
-     * @var mixed
+     * @var bool|string|null
      */
     protected $referrer;
 
@@ -102,7 +102,7 @@ class UserAgent
      */
     public function __construct(?UserAgents $config = null)
     {
-        $this->config = $config ?? new UserAgents();
+        $this->config = $config ?? config(UserAgents::class);
 
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $this->agent = trim($_SERVER['HTTP_USER_AGENT']);
@@ -247,6 +247,8 @@ class UserAgent
 
     /**
      * Parse a custom user-agent string
+     *
+     * @return void
      */
     public function parse(string $string)
     {
@@ -269,6 +271,8 @@ class UserAgent
 
     /**
      * Compile the User Agent Data
+     *
+     * @return void
      */
     protected function compileData()
     {
